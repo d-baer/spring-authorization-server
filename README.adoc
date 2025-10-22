@@ -4,7 +4,9 @@
 
 Spring Authorization Server has https://spring.io/blog/2025/09/11/spring-authorization-server-moving-to-spring-security-7-0[moved to Spring Security 7.0].
 
-This repository will become inactive after https://spring.io/projects/spring-authorization-server#support[OSS Support] ends for the *1.5.x* branch in June 2026.
+The *1.5.x* branch is the last generation of Spring Authorization Server. See the OSS and Enterprise https://spring.io/projects/spring-authorization-server#support[support timelines].
+
+Going forward, new features will be added to Spring Security starting in 7.0.
 
 '''
 
