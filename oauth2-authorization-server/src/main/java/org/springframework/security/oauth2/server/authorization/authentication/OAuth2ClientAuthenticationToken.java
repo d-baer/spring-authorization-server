@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 the original author or authors.
+ * Copyright 2020-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package org.springframework.security.oauth2.server.authorization.authentication;
 
+import java.io.Serial;
 import java.util.Collections;
 import java.util.Map;
 
@@ -23,7 +24,6 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.Transient;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.core.Version;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.util.Assert;
 
@@ -42,16 +42,23 @@ import org.springframework.util.Assert;
  */
 @Transient
 public class OAuth2ClientAuthenticationToken extends AbstractAuthenticationToken {
-	private static final long serialVersionUID = Version.SERIAL_VERSION_UID;
+
+	@Serial
+	private static final long serialVersionUID = -7150784632941221304L;
+
 	private final String clientId;
+
 	private final RegisteredClient registeredClient;
+
 	private final ClientAuthenticationMethod clientAuthenticationMethod;
+
 	private final Object credentials;
+
 	private final Map<String, Object> additionalParameters;
 
 	/**
-	 * Constructs an {@code OAuth2ClientAuthenticationToken} using the provided parameters.
-	 *
+	 * Constructs an {@code OAuth2ClientAuthenticationToken} using the provided
+	 * parameters.
 	 * @param clientId the client identifier
 	 * @param clientAuthenticationMethod the authentication method used by the client
 	 * @param credentials the client credentials
@@ -66,19 +73,19 @@ public class OAuth2ClientAuthenticationToken extends AbstractAuthenticationToken
 		this.registeredClient = null;
 		this.clientAuthenticationMethod = clientAuthenticationMethod;
 		this.credentials = credentials;
-		this.additionalParameters = Collections.unmodifiableMap(
-				additionalParameters != null ? additionalParameters : Collections.emptyMap());
+		this.additionalParameters = Collections
+			.unmodifiableMap((additionalParameters != null) ? additionalParameters : Collections.emptyMap());
 	}
 
 	/**
-	 * Constructs an {@code OAuth2ClientAuthenticationToken} using the provided parameters.
-	 *
+	 * Constructs an {@code OAuth2ClientAuthenticationToken} using the provided
+	 * parameters.
 	 * @param registeredClient the authenticated registered client
 	 * @param clientAuthenticationMethod the authentication method used by the client
 	 * @param credentials the client credentials
 	 */
-	public OAuth2ClientAuthenticationToken(RegisteredClient registeredClient, ClientAuthenticationMethod clientAuthenticationMethod,
-			@Nullable Object credentials) {
+	public OAuth2ClientAuthenticationToken(RegisteredClient registeredClient,
+			ClientAuthenticationMethod clientAuthenticationMethod, @Nullable Object credentials) {
 		super(Collections.emptyList());
 		Assert.notNull(registeredClient, "registeredClient cannot be null");
 		Assert.notNull(clientAuthenticationMethod, "clientAuthenticationMethod cannot be null");
@@ -86,7 +93,7 @@ public class OAuth2ClientAuthenticationToken extends AbstractAuthenticationToken
 		this.registeredClient = registeredClient;
 		this.clientAuthenticationMethod = clientAuthenticationMethod;
 		this.credentials = credentials;
-		this.additionalParameters = Collections.unmodifiableMap(Collections.emptyMap());
+		this.additionalParameters = Collections.emptyMap();
 		setAuthenticated(true);
 	}
 
@@ -102,9 +109,10 @@ public class OAuth2ClientAuthenticationToken extends AbstractAuthenticationToken
 	}
 
 	/**
-	 * Returns the authenticated {@link RegisteredClient registered client}, or {@code null} if not authenticated.
-	 *
-	 * @return the authenticated {@link RegisteredClient}, or {@code null} if not authenticated
+	 * Returns the authenticated {@link RegisteredClient registered client}, or
+	 * {@code null} if not authenticated.
+	 * @return the authenticated {@link RegisteredClient}, or {@code null} if not
+	 * authenticated
 	 */
 	@Nullable
 	public RegisteredClient getRegisteredClient() {
@@ -112,8 +120,8 @@ public class OAuth2ClientAuthenticationToken extends AbstractAuthenticationToken
 	}
 
 	/**
-	 * Returns the {@link ClientAuthenticationMethod authentication method} used by the client.
-	 *
+	 * Returns the {@link ClientAuthenticationMethod authentication method} used by the
+	 * client.
 	 * @return the {@link ClientAuthenticationMethod} used by the client
 	 */
 	public ClientAuthenticationMethod getClientAuthenticationMethod() {
@@ -122,7 +130,6 @@ public class OAuth2ClientAuthenticationToken extends AbstractAuthenticationToken
 
 	/**
 	 * Returns the additional parameters.
-	 *
 	 * @return the additional parameters
 	 */
 	public Map<String, Object> getAdditionalParameters() {
